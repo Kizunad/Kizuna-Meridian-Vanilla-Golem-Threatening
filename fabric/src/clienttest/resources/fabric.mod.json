@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "meridian_golem_clienttest",
+  "version": "1.0.0",
+  "name": "傀儡客户端截图",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-client-gametest": [
+      "dev.kizuna.meridian.golem.clienttest.GolemClientTest"
+    ]
+  },
+  "depends": {"fabric-api": "*", "meridian_golem": "*"}
+}

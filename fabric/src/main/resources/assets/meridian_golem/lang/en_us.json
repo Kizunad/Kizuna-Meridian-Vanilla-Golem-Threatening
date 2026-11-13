@@ -1,0 +1,6 @@
+{
+  "block.meridian_golem.golem_bench": "Golem Bench",
+  "block.meridian_golem.golem_bench.desc": "A villager without a trade who keeps this bench becomes a golemancer",
+  "entity.meridian_golem.villager.golemancer": "Golemancer",
+  "itemGroup.meridian_golem.golem": "Golems"
+}

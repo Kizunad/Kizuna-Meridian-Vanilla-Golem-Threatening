@@ -1,0 +1,85 @@
+plugins {
+    id 'net.fabricmc.fabric-loom'
+}
+
+description = '傀儡仓的 26.2 Fabric 模组：傀儡工作台、傀儡师职业与工作站点、创造栏、随包的傀儡师住处结构。'
+
+dependencies {
+    // 26.x 不混淆：直接用官方名编译，没有映射。
+    minecraft libs.minecraft
+    implementation libs.fabric.loader
+    implementation libs.fabric.api
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') { expand version: project.version }
+}
+
+// GameTest 与客户端截图只扩展当前模组的源集，夹具不进生产 JAR。
+sourceSets {
+    gametest {
+        compileClasspath += sourceSets.main.compileClasspath + sourceSets.main.output
+        runtimeClasspath += sourceSets.main.runtimeClasspath + sourceSets.main.output
+    }
+    clienttest {
+        compileClasspath += sourceSets.main.compileClasspath + sourceSets.main.output
+        runtimeClasspath += sourceSets.main.runtimeClasspath + sourceSets.main.output
+    }
+}
+
+loom {
+    mods {
+        meridian_golem { sourceSet sourceSets.main }
+        meridian_golem_test { sourceSet sourceSets.gametest }
+        meridian_golem_clienttest { sourceSet sourceSets.clienttest }
+    }
+    runs {
+        server { runDir 'build/server' }
+        gametest {
+            server()
+            name 'Meridian Golem GameTest'
+            source sourceSets.gametest
+            runDir 'build/gametest'
+            vmArg '-Dfabric-api.gametest'
+            vmArg '-Dfabric-api.gametest.report-file=build/gametest-results.xml'
+        }
+        clientGametest {
+            client()
+            name '傀儡客户端截图'
+            source sourceSets.clienttest
+            runDir 'build/clienttest'
+            vmArg '-Dfabric.client.gametest'
+            vmArg '-Dfabric.client.gametest.modid=meridian_golem_clienttest'
+            programArgs '--width', '1280', '--height', '960'
+            programArgs '--username', 'GolemTest'
+        }
+    }
+}
+
+afterEvaluate {
+    tasks.named('runGametest') {
+        doFirst {
+            // 每局从空目录新建世界：26.2 把生成设置与游戏规则拆到了 data/minecraft，只删 level.dat 会退回随机地形。
+            def runDirectory = file('build/gametest')
+            runDirectory.mkdirs()
+            new File(runDirectory, 'world').deleteDir()
+            new File(runDirectory, 'eula.txt').text = 'eula=true\n'
+            new File(runDirectory, 'server.properties').text = '''online-mode=false
+server-ip=127.0.0.1
+server-port=0
+generate-structures=false
+view-distance=2
+simulation-distance=2
+'''
+        }
+    }
+    tasks.named('runClientGametest') {
+        doFirst {
+            // 跳过首启无障碍引导，界面用中文，与用户实例一致。
+            def runDirectory = file('build/clienttest')
+            runDirectory.mkdirs()
+            new File(runDirectory, 'options.txt').text = 'onboardAccessibility:false\nguiScale:2\nlang:zh_cn\n'
+        }
+    }
+}

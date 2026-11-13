@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "meridian_golem:block/golem_bench",
+      "y": 90
+    },
+    "facing=east": {
+      "model": "meridian_golem:block/golem_bench",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "meridian_golem:block/golem_bench",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "meridian_golem:block/golem_bench"
+    }
+  }
+}

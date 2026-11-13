@@ -1,0 +1,6 @@
+{
+  "block.meridian_golem.golem_bench": "傀儡工作台",
+  "block.meridian_golem.golem_bench.desc": "没活计的村民守着它，就成了傀儡师",
+  "entity.meridian_golem.villager.golemancer": "傀儡师",
+  "itemGroup.meridian_golem.golem": "傀儡"
+}

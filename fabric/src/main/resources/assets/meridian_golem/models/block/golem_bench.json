@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "minecraft:block/dark_oak_planks",
+    "front": "meridian_golem:block/golem_bench_front",
+    "side": "meridian_golem:block/golem_bench_side",
+    "top": "meridian_golem:block/golem_bench_top"
+  }
+}
