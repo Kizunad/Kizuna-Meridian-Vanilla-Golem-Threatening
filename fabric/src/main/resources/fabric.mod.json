@@ -3,7 +3,13 @@
   "id": "meridian_golem",
   "version": "${version}",
   "name": "Kizuna's Meridian Vanilla Golem Threatening",
-  "description": "傀儡：傀儡工作台、傀儡师职业与傀儡师住处",
+  "contact": {
+    "homepage": "https://github.com/Kizunad/Kizuna-Meridian-Vanilla-Golem-Threatening",
+    "sources": "https://github.com/Kizunad/Kizuna-Meridian-Vanilla-Golem-Threatening",
+    "issues": "https://github.com/Kizunad/Kizuna-Meridian-Vanilla-Golem-Threatening/issues"
+  },
+  "icon": "assets/meridian_golem/icon.png",
+  "description": "Adds a golem artisan, a village workshop and a workbench for golem craft.\n村里出现傀儡师和他的住处，并可找到傀儡工作台。",
   "authors": [
     "Kizunad"
   ],

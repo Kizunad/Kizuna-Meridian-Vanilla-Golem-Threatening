@@ -13,7 +13,11 @@ dependencies {
 
 processResources {
     inputs.property 'version', project.version
-    filesMatching('fabric.mod.json') { expand version: project.version }
+    def preserveJsonEscapes = true
+    inputs.property 'preserveJsonEscapes', preserveJsonEscapes
+    filesMatching('fabric.mod.json') {
+        expand([version: project.version]) { escapeBackslash = preserveJsonEscapes }
+    }
 }
 
 // GameTest 与客户端截图只扩展当前模组的源集，夹具不进生产 JAR。
